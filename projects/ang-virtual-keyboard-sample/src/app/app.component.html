@@ -1,0 +1,28 @@
+<!-- Template forms -->
+<p>Template Form</p>
+<div>Template Input Value : {{inputString}}</div>
+<div class="setKeyBoardWidth">
+  <input type="text" name="enterhere" [(ngModel)]="inputString" [(appVirtualKeyboard)]="inputString"
+    [isKeyboardDirectiveActive]="true" [kboardType]="'alphaNumericType2'">
+</div>
+<div class="setKeyBoardWidth">
+  <input type="text" name="enterhere" [(ngModel)]="inputString" [(appVirtualKeyboard)]="inputString"
+    [isKeyboardDirectiveActive]="true">
+</div>
+<div class="setKeyBoardWidth">
+  <input type="text" name="enterhere" [(ngModel)]="inputString" [(appVirtualKeyboard)]="inputString"
+    [isKeyboardDirectiveActive]="true" [kboardType]="'numeric'">
+</div>
+
+<!-- Reactive forms -->
+<p>Reactive Form</p>
+<div>Reative Input Value : {{reactiveControl.value}}</div>
+<div class="setKeyBoardWidth">
+  <input type="text" name="reactiveControl" [formControl]="reactiveControl" [appVirtualKeyboard]="''"
+    (appVirtualKeyboardChange)="valueChange($event)" [isKeyboardDirectiveActive]="true"
+    [kboardType]="'alphaNumericType2'"
+    (keyup.backspace)="onBackPress()"
+    (setValue)="setValue = $event">
+</div>
+
+<!-- Two way binding with property where you want to store value -->

@@ -1,0 +1,98 @@
+button.keys-styles {
+  border: 0;
+  width: 100%;
+  white-space: nowrap;
+  background: rgb(242, 222, 222);
+  min-height: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.keyboard-body {
+  border: 1px solid #f2dede;
+
+}
+
+.keyboardroot {
+  position: absolute;
+  width: 80%;
+  z-index: 999999999;
+}
+
+/* .keys{
+    height: 28px;
+    width: 28px;
+} */
+button.keys-styles.selected {
+  background: rgba(156, 38, 36, 0.37);
+}
+
+/* .other-button{
+    height: 28px;
+} */
+
+.fix-number-last-row {
+  width: 34%
+}
+
+.number-table {
+  width: 100%;
+}
+
+@keyframes keyboard-insert-animation {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.set-positioning {
+  position: relative;
+  transform-origin: top left;
+  display: table;
+  background: white;
+  margin-bottom: 10px;
+  animation-name: keyboard-insert-animation;
+  animation-duration: 100ms;
+}
+
+tr, table {
+  width: 100%;
+}
+
+td {
+  padding: 2px;
+}
+
+.alpha-numeric-flex {
+  display: flex;
+}
+
+.alpha-width {
+  width: 100%;
+}
+
+.spacebar-width {
+  width: 80%;
+}
+
+.table-numeric-row {
+  table-layout: fixed;
+}
+
+.numeric-decimal-bold {
+  font-weight: bold;
+}
+
+.only-numeric-max-width {
+  max-width: 300px;
+}
+
+button.keys-styles.backspace-icon {
+  background-image: url('/assets/baseline-backspace-24px.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
+}

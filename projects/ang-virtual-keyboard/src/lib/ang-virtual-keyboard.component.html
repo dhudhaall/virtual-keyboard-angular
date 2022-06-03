@@ -1,0 +1,286 @@
+<div class="keyboardroot" [ngClass]="{'only-numeric-max-width': kboardType=='numeric'}">
+  <table class="keyboard-body set-positioning" id="keyboardrootTable">
+    <tbody *ngIf="kboardType !== 'numeric'">
+      <tr>
+        <td>
+          <div id="keyboard-special-keys">
+            <table>
+              <tbody>
+                <tr>
+                  <td *ngFor="let i of SpCharArrayDisp | slice:0:13">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (ontouchstart)="hoveredOrMouseDown=true"
+                      (mouseup)="hoveredOrMouseDown=false" (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    &nbsp;
+                  </td>
+                  <td *ngFor="let i of SpCharArrayDisp | slice:13:26">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                      (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                  <td>
+                    &nbsp;
+                  </td>
+                  <td>
+                    &nbsp;
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="kboardType === 'alphaNumeric'">
+        <table>
+          <tbody>
+            <tr>
+              <td *ngFor="let i of numArrayDisp | slice:0:10">
+                <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                  (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                  (mouseleave)="hoveredOrMouseDown=false">{{ hoveredOrMouseDown
+                  ==
+                  true ? (isHoverOn? '*' : i) : i }}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tr>
+      <tr class="alpha-numeric-flex">
+        <td class="alpha-width">
+          <div id="keyboard-alpha-keys" align="center">
+            <table>
+              <tbody>
+                <tr>
+                  <td *ngFor="let i of alphaArrayDisp | slice:0:10">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                      (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="backbutton other-button donotRemove keys-styles"
+                      (click)="backspaceKeyPressed()">Backspace
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    &nbsp;
+                  </td>
+                  <td *ngFor="let i of alphaArrayDisp | slice:10:19">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                      (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                  <td class="button">
+                    <button type="button" (click)="clearButtonPressed()" class="other-button donotRemove keys-styles">
+                      Clear
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    &nbsp;
+                  </td>
+                  <td>
+                    &nbsp;
+                  </td>
+                  <td *ngFor="let i of alphaArrayDisp | slice:19:26">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                      (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                  <td class="button">
+                    <button type="button" class="capslockbutton other-button donotRemove keys-styles"
+                      (click)="toggleCapsLock()" [class.selected]="isCapsLockOn">{{ isCapsLockOn == true ? 'Caps ON' :
+                      'Caps Off' }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    &nbsp;
+                  </td>
+                  <td>
+                    &nbsp;
+                  </td>
+                  <td class="button">
+                    <button type="button" class="hoveringbutton other-button donotRemove keys-styles" id="virtualButton"
+                      (click)="toggleHover()" [class.selected]="isHoverOn">{{ isHoverOn == true ? 'Masking On' :
+                      'Masking Off' }}
+                    </button>
+                  </td>
+                  <td class="spacebar-width">
+                    <button type="button" (click)="spacebarKeyPressed()" class="other-button spacebar keys-styles">Space
+                    </button>
+                  </td>
+                  <td class="button">
+                    <button type="button" class="other-button donotRemove keys-styles" id="elemC3"
+                      (click)="toggleShuffle()" [class.selected]="isShuffleOn">
+                      {{ isShuffleOn == true ? 'Shuffle On' : 'Shuffle Off' }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+        <td class="numeric-width" *ngIf="kboardType === 'alphaNumericType2'">
+          <div id="keyboard-numeric-keys">
+            <table>
+              <tbody>
+                <tr>
+                  <td *ngFor="let i of numArrayDisp | slice:0:3">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                      (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <td *ngFor="let i of numArrayDisp | slice:3:6">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                      (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <td *ngFor="let i of numArrayDisp | slice:6:9">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                      (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="number-table">
+              <tbody>
+                <tr>
+                  <td *ngFor="let i of numArrayDisp | slice:9:10" align="center">
+                    <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                      (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                      (mouseleave)="hoveredOrMouseDown=false">{{
+                      hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="kboardType === 'numeric'">
+      <td class="numeric-width">
+        <div id="keyboard-numeric-keys">
+          <table>
+            <tbody>
+              <tr *ngFor="let i of numericRowsCount ;let numerRowNum = index;">
+                <td *ngFor="let i of numArrayDisp | slice:(numerRowNum*3):((numerRowNum+1)*3)">
+                  <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                    (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                    (mouseleave)="hoveredOrMouseDown=false">{{
+                    hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table-numeric-row">
+            <tbody>
+              <tr>
+                <td align="center">
+                  <button type="button" class="keys donotRemove keys-styles numeric-decimal-bold"
+                    (click)="onCharacterKeyClick('.')" (mousedown)="hoveredOrMouseDown=true"
+                    (mouseup)="hoveredOrMouseDown=false" (mouseleave)="hoveredOrMouseDown=false">{{
+                    hoveredOrMouseDown == true ? (isHoverOn? '*' : '.') : '.' }}
+                  </button>
+                </td>
+                <td *ngFor="let i of numArrayDisp | slice:9:10" align="center">
+                  <button type="button" class="keys donotRemove keys-styles" (click)="onCharacterKeyClick(i)"
+                    (mousedown)="hoveredOrMouseDown=true" (mouseup)="hoveredOrMouseDown=false"
+                    (mouseleave)="hoveredOrMouseDown=false">{{
+                    hoveredOrMouseDown == true ? (isHoverOn? '*' : i) : i }}
+                  </button>
+                </td>
+                <td align="center">
+                  <button type="button" class="backbutton other-button donotRemove keys-styles"
+                    (click)="backspaceKeyPressed()">Backspace
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table-numeric-row">
+            <tbody>
+              <tr>
+                <td class="button">
+                  <button type="button" class="other-button donotRemove keys-styles" id="elemC3"
+                    (click)="toggleShuffle()" [class.selected]="isShuffleOn">
+                    {{ isShuffleOn == true ? 'Shuffle On' : 'Shuffle Off' }}
+                  </button>
+                </td>
+
+                <td class="button">
+                  <button type="button" class="hoveringbutton other-button donotRemove keys-styles" id="virtualButton"
+                    (click)="toggleHover()" [class.selected]="isHoverOn">{{ isHoverOn == true ? 'Masking On' : 'Masking
+                    Off' }}
+                  </button>
+                </td>
+                <td class="button">
+                  <button type="button" (click)="clearButtonPressed()" class="other-button donotRemove keys-styles">
+                    Clear
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tbody>
+  </table>
+</div>

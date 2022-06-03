@@ -1,0 +1,15 @@
+{
+  "name": "ang-virtual-keyboard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeIsAnArt/ang-virtual-keyboard/tree/master"
+  },
+  "version": "1.0.3",
+  "peerDependencies": {
+    "@angular/common": "^11.1.0",
+    "@angular/core": "^11.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

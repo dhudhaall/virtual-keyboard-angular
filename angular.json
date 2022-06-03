@@ -1,0 +1,175 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ang-virtual-keyboard": {
+      "projectType": "library",
+      "root": "projects/ang-virtual-keyboard",
+      "sourceRoot": "projects/ang-virtual-keyboard/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ang-virtual-keyboard/tsconfig.lib.json",
+            "project": "projects/ang-virtual-keyboard/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ang-virtual-keyboard/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ang-virtual-keyboard/src/test.ts",
+            "tsConfig": "projects/ang-virtual-keyboard/tsconfig.spec.json",
+            "karmaConfig": "projects/ang-virtual-keyboard/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ang-virtual-keyboard/tsconfig.lib.json",
+              "projects/ang-virtual-keyboard/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "husky": {
+          "hooks": {
+            "pre-commit": "lint-staged"
+          }
+        },
+        "lint-staged": {
+          "projects/**/*.ts": [
+            "prettier --write",
+            "git add"
+          ]
+        }
+      }
+    },
+    "ang-virtual-keyboard-sample": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ang-virtual-keyboard-sample",
+      "sourceRoot": "projects/ang-virtual-keyboard-sample/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ang-virtual-keyboard-sample",
+            "index": "projects/ang-virtual-keyboard-sample/src/index.html",
+            "main": "projects/ang-virtual-keyboard-sample/src/main.ts",
+            "polyfills": "projects/ang-virtual-keyboard-sample/src/polyfills.ts",
+            "tsConfig": "projects/ang-virtual-keyboard-sample/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ang-virtual-keyboard-sample/src/favicon.ico",
+              "projects/ang-virtual-keyboard-sample/src/assets"
+            ],
+            "styles": [
+              "projects/ang-virtual-keyboard-sample/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ang-virtual-keyboard-sample/src/environments/environment.ts",
+                  "with": "projects/ang-virtual-keyboard-sample/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ang-virtual-keyboard-sample:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ang-virtual-keyboard-sample:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ang-virtual-keyboard-sample:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ang-virtual-keyboard-sample/src/test.ts",
+            "polyfills": "projects/ang-virtual-keyboard-sample/src/polyfills.ts",
+            "tsConfig": "projects/ang-virtual-keyboard-sample/tsconfig.spec.json",
+            "karmaConfig": "projects/ang-virtual-keyboard-sample/karma.conf.js",
+            "assets": [
+              "projects/ang-virtual-keyboard-sample/src/favicon.ico",
+              "projects/ang-virtual-keyboard-sample/src/assets"
+            ],
+            "styles": [
+              "projects/ang-virtual-keyboard-sample/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ang-virtual-keyboard-sample/tsconfig.app.json",
+              "projects/ang-virtual-keyboard-sample/tsconfig.spec.json",
+              "projects/ang-virtual-keyboard-sample/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ang-virtual-keyboard-sample/e2e/protractor.conf.js",
+            "devServerTarget": "ang-virtual-keyboard-sample:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ang-virtual-keyboard-sample:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ang-virtual-keyboard"
+}

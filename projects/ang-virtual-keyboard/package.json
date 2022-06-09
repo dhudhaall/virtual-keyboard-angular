@@ -1,8 +1,8 @@
 {
-  "name": "ang-virtual-keyboard",
+  "name": "@dhudhaall/keyboard",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CodeIsAnArt/ang-virtual-keyboard/tree/master"
+    "url": "https://github.com/dhudhaall/virtual-keyboard-angular/tree/master"
   },
   "version": "1.0.3",
   "peerDependencies": {
